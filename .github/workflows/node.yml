@@ -30,16 +30,13 @@ jobs:
       - name: Instalar Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: 22
+          node-version: 25
 
       - name: Instalar dependencias
         run: npm install
 
       - name: Generar cliente de Prisma
         run: npx prisma generate
-
-      - name: Ejecutar ESLint
-        run: npm run lint
 
       - name: Ejecutar Tests
         run: npm test
@@ -64,7 +61,7 @@ jobs:
       - name: Instalar Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: 22
+          node-version: 25
 
       - name: Instalar dependencias
         run: npm install
@@ -72,8 +69,28 @@ jobs:
       - name: Generar cliente de Prisma
         run: npx prisma generate
 
-      - name: Ejecutar ESLint
-        run: npm run lint
-
       - name: Ejecutar Tests
         run: npm test
+
+  eslint:
+
+    runs-on: ubuntu-latest
+
+    env:
+      JWT_SECRET: ${{ secrets.JWT_SECRET }}
+
+    steps:
+
+      - name: Descargar repositorio
+        uses: actions/checkout@v4
+
+      - name: Instalar Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 25
+
+      - name: Instalar dependencias raíz
+        run: npm install
+
+      - name: Ejecutar ESLint
+        run: npm run lint
