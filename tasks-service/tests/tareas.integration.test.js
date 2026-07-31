@@ -5,6 +5,9 @@ import { describe, test, expect, beforeAll } from '@jest/globals';
 // Importa Supertest para hacer peticiones HTTP
 import request from 'supertest';
 
+// Importa el JSON Web Tokens
+import jwt from 'jsonwebtoken';
+
 // Importa la aplicación Express
 import app from '../app.js';
 
@@ -13,30 +16,19 @@ let tareaId;
 
 describe('Pruebas de integración - Tareas', () => {
 
-    // Antes de ejecutar los tests registra un usuario y obtiene un JWT
-    beforeAll(async () => {
+    beforeAll(() => {
 
-        const correo = `usuario${Date.now()}@gmail.com`;
 
-        // Registrar usuario
-        // Realiza peticiones HTTP a la aplicación Express.
-        await request(app)
-            .post('/api/register')
-            .send({
-                nombre: 'Usuario Test',
-                correo,
-                password: '123456',
-            });
-
-        // Iniciar sesión
-        const login = await request(app)
-            .post('/api/login')
-            .send({
-                correo,
-                password: '123456',
-            });
-
-        token = login.body.token;
+        // Antes de ejecutar las pruebas se crea manualmente un JWT.
+        // De esta forma las pruebas de tasks-service son independientes
+        // y no necesitan registrar usuarios ni llamar al login del auth-service.
+        token = jwt.sign(
+            {
+                id: 1,
+                correo: 'admin@test.com',
+            },
+            process.env.JWT_SECRET,
+        );
 
     });
 
