@@ -1,0 +1,21 @@
+
+# Dependencias
+node_modules/
+
+# Variables de entorno
+.env
+
+# Archivos de logs
+*.log
+
+/generated/prisma
+
+# Archivos del sistema
+.DS_Store
+Thumbs.db
+
+# Archivos de logs
+logs/
+
+# Es la carpeta donde Visual Studio Code guarda configuraciones del editor.
+.vscode/
