@@ -5,14 +5,14 @@ const options = {
         openapi: '3.0.0',
 
         info: {
-            title: 'Auth Service',
+            title: 'Tasks Service',
             version: '1.0.0',
             description: 'Microservicio de autenticación',
         },
 
         servers: [
             {
-                url: 'http://localhost:3001',
+                url: 'http://localhost:3002',
             },
         ],
 
