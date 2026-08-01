@@ -14,9 +14,7 @@ export const crearTarea = async (req, res, next) => {
 
 export const obtenerTareas = async (req, res, next) => {
     try {
-        const tareas = await dependencies.obtenerTareas.execute(
-            req.usuario.id,
-        );
+        const tareas = await dependencies.obtenerTareas.execute(req.usuario.id);
 
         res.json(tareas);
     } catch (err) {

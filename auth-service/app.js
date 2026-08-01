@@ -23,11 +23,7 @@ app.use(limiter);
 // ÚNICAMENTE las rutas de autenticación
 app.use('/api', authRouter);
 
-app.use(
-    '/api-docs',
-    swaggerUi.serve,
-    swaggerUi.setup(swaggerSpec),
-);
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 
 app.use(errorHandler);
 

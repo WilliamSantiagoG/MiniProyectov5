@@ -2,7 +2,6 @@ import { TareaRepository } from '../../domain/ports/tarea.repository.js';
 import { prisma } from '../prisma/client.js';
 
 export class PrismaTareaRepository extends TareaRepository {
-
     constructor() {
         super();
     }
@@ -29,7 +28,6 @@ export class PrismaTareaRepository extends TareaRepository {
     }
 
     async actualizar(id, userId, datos) {
-
         const tarea = await prisma.tarea.findFirst({
             where: {
                 id,
@@ -47,11 +45,9 @@ export class PrismaTareaRepository extends TareaRepository {
             },
             data: datos,
         });
-
     }
 
     async eliminar(id, userId) {
-
         const tarea = await prisma.tarea.findFirst({
             where: {
                 id,
@@ -68,7 +64,5 @@ export class PrismaTareaRepository extends TareaRepository {
                 id,
             },
         });
-
     }
-
 }

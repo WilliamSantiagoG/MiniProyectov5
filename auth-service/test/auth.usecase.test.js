@@ -1,10 +1,4 @@
-import {
-    jest,
-    describe,
-    test,
-    expect,
-    beforeEach,
-} from '@jest/globals';
+import { jest, describe, test, expect, beforeEach } from '@jest/globals';
 
 // Mock de bcrypt
 jest.unstable_mockModule('bcrypt', () => ({
@@ -25,13 +19,10 @@ jest.unstable_mockModule('jsonwebtoken', () => ({
 const bcrypt = (await import('bcrypt')).default;
 const jwt = (await import('jsonwebtoken')).default;
 
-const { RegistrarUsuario } = await import(
-    '../application/use-cases/auth/registrar-usuario.js'
-);
+const { RegistrarUsuario } =
+    await import('../application/use-cases/auth/registrar-usuario.js');
 
-const { Login } = await import(
-    '../application/use-cases/auth/login.js'
-);
+const { Login } = await import('../application/use-cases/auth/login.js');
 
 // Repositorio falso
 const repository = {
@@ -44,9 +35,7 @@ beforeEach(() => {
 });
 
 describe('Casos de uso de Autenticación', () => {
-
     test('Debe registrar un usuario', async () => {
-
         repository.buscarPorCorreo.mockResolvedValue(null);
 
         bcrypt.hash.mockResolvedValue('passwordHash');
@@ -72,7 +61,6 @@ describe('Casos de uso de Autenticación', () => {
     });
 
     test('No debe registrar un correo repetido', async () => {
-
         repository.buscarPorCorreo.mockResolvedValue({
             id: 1,
             correo: 'admin@gmail.com',
@@ -85,12 +73,11 @@ describe('Casos de uso de Autenticación', () => {
                 nombre: 'Administrador',
                 correo: 'admin@gmail.com',
                 password: '123456',
-            })
+            }),
         ).rejects.toThrow('El correo ya está registrado');
     });
 
     test('Debe iniciar sesión correctamente', async () => {
-
         repository.buscarPorCorreo.mockResolvedValue({
             id: 1,
             correo: 'admin@gmail.com',
@@ -112,7 +99,6 @@ describe('Casos de uso de Autenticación', () => {
     });
 
     test('No debe iniciar sesión con contraseña incorrecta', async () => {
-
         repository.buscarPorCorreo.mockResolvedValue({
             id: 1,
             correo: 'admin@gmail.com',
@@ -127,12 +113,11 @@ describe('Casos de uso de Autenticación', () => {
             login.ejecutar({
                 correo: 'admin@gmail.com',
                 password: '123456',
-            })
+            }),
         ).rejects.toThrow('Credenciales inválidas');
     });
 
     test('No debe iniciar sesión con un correo inexistente', async () => {
-
         repository.buscarPorCorreo.mockResolvedValue(null);
 
         const login = new Login(repository);
@@ -141,12 +126,11 @@ describe('Casos de uso de Autenticación', () => {
             login.ejecutar({
                 correo: 'otro@gmail.com',
                 password: '123456',
-            })
+            }),
         ).rejects.toThrow('Credenciales inválidas');
     });
 
     test('Debe generar un JWT', async () => {
-
         repository.buscarPorCorreo.mockResolvedValue({
             id: 10,
             correo: 'admin@gmail.com',
@@ -168,5 +152,4 @@ describe('Casos de uso de Autenticación', () => {
 
         expect(token).toBe('JWT_GENERADO');
     });
-
 });

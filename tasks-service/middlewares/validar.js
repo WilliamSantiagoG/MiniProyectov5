@@ -1,7 +1,6 @@
 // Middleware que recibe cualquier esquema Zod
 // y valida el body de la petición contra ese esquema
 export const validar = (schema) => (req, res, next) => {
-
     // nunca lanza exepcion, siempre da un objeto
     const resultado = schema.safeParse(req.body);
 

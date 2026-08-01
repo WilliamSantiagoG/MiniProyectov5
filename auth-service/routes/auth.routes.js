@@ -4,20 +4,13 @@ import express from 'express';
 import { validar } from '../middlewares/validar.js';
 import { loggerMiddleware } from '../middlewares/logger.js';
 
-import {
-    registrar,
-    login,
-} from '../controllers/auth.controller.js';
+import { registrar, login } from '../controllers/auth.controller.js';
 
-import {
-    schemaRegistro,
-    schemaLogin,
-} from '../schemas/auth.schema.js';
+import { schemaRegistro, schemaLogin } from '../schemas/auth.schema.js';
 
 const router = express.Router();
 
 router.use(loggerMiddleware);
-
 
 /**
  * @swagger
@@ -54,12 +47,7 @@ router.use(loggerMiddleware);
  *         description: Datos inválidos.
  */
 
-router.post(
-    '/register',
-    validar(schemaRegistro),
-    registrar,
-);
-
+router.post('/register', validar(schemaRegistro), registrar);
 
 /**
  * @swagger
@@ -92,10 +80,6 @@ router.post(
  *         description: Credenciales inválidas.
  */
 
-router.post(
-    '/login',
-    validar(schemaLogin),
-    login,
-);
+router.post('/login', validar(schemaLogin), login);
 
 export default router;

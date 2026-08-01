@@ -1,12 +1,6 @@
 // Pruebas de los Casos de Uso (Use Cases)
 
-import {
-    jest,
-    describe,
-    test,
-    expect,
-    beforeEach,
-} from '@jest/globals';
+import { jest, describe, test, expect, beforeEach } from '@jest/globals';
 
 // Mock del repositorio
 const repository = {
@@ -29,9 +23,7 @@ beforeEach(() => {
 });
 
 describe('Pruebas de los Use Cases de Tareas', () => {
-
     test('Debe crear una tarea', async () => {
-
         repository.crear.mockResolvedValue({
             id: 1,
             titulo: 'Aprender Prisma',
@@ -52,11 +44,9 @@ describe('Pruebas de los Use Cases de Tareas', () => {
 
         expect(resultado.id).toBe(1);
         expect(resultado.titulo).toBe('Aprender Prisma');
-
     });
 
     test('Debe obtener todas las tareas', async () => {
-
         repository.obtenerTodas.mockResolvedValue([
             {
                 id: 1,
@@ -68,36 +58,28 @@ describe('Pruebas de los Use Cases de Tareas', () => {
             },
         ]);
 
-        const obtenerTareas =
-            new ObtenerTareasUseCase(repository);
+        const obtenerTareas = new ObtenerTareasUseCase(repository);
 
-        const resultado =
-            await obtenerTareas.execute(1);
+        const resultado = await obtenerTareas.execute(1);
 
         expect(resultado).toHaveLength(2);
-
     });
 
     test('Debe obtener una tarea por id', async () => {
-
         repository.obtenerPorId.mockResolvedValue({
             id: 3,
             titulo: 'Zod',
         });
 
-        const obtenerPorId =
-            new ObtenerTareaPorIdUseCase(repository);
+        const obtenerPorId = new ObtenerTareaPorIdUseCase(repository);
 
-        const resultado =
-            await obtenerPorId.execute(3, 1);
+        const resultado = await obtenerPorId.execute(3, 1);
 
         expect(resultado.id).toBe(3);
         expect(resultado.titulo).toBe('Zod');
-
     });
 
     test('Debe actualizar una tarea', async () => {
-
         repository.obtenerPorId.mockResolvedValue({
             id: 1,
             titulo: 'Viejo',
@@ -108,78 +90,56 @@ describe('Pruebas de los Use Cases de Tareas', () => {
             titulo: 'Nuevo',
         });
 
-        const actualizar =
-            new ActualizarTareaUseCase(repository);
+        const actualizar = new ActualizarTareaUseCase(repository);
 
-        const resultado =
-            await actualizar.execute(
-                100,
-                {
-                    titulo: 'Nuevo',
-                },
-                1,
-            );
+        const resultado = await actualizar.execute(
+            100,
+            {
+                titulo: 'Nuevo',
+            },
+            1,
+        );
 
         expect(resultado.titulo).toBe('Nuevo');
-
     });
 
     test('No debe actualizar una tarea inexistente', async () => {
-
         repository.obtenerPorId.mockResolvedValue(null);
 
-        const actualizar =
-            new ActualizarTareaUseCase(repository);
+        const actualizar = new ActualizarTareaUseCase(repository);
 
-        const resultado =
-            await actualizar.execute(
-                100,
-                {
-                    titulo: 'Nuevo',
-                },
-                1,
-            );
+        const resultado = await actualizar.execute(
+            100,
+            {
+                titulo: 'Nuevo',
+            },
+            1,
+        );
 
         expect(resultado).toBeNull();
-
     });
 
     test('Debe eliminar una tarea', async () => {
-
         repository.obtenerPorId.mockResolvedValue({
             id: 1,
         });
 
         repository.eliminar.mockResolvedValue();
 
-        const eliminar =
-            new EliminarTareaUseCase(repository);
+        const eliminar = new EliminarTareaUseCase(repository);
 
-        const resultado =
-            await eliminar.execute(
-                1,
-                1,
-            );
+        const resultado = await eliminar.execute(1, 1);
 
         expect(resultado).toBe(true);
-
     });
 
     test('No debe eliminar una tarea inexistente', async () => {
-
         repository.obtenerPorId.mockResolvedValue(null);
 
-        const eliminar =
-            new EliminarTareaUseCase(repository);
+        const eliminar = new EliminarTareaUseCase(repository);
 
-        const resultado =
-            await eliminar.execute(
-                100,
-                1,
-            );
+        const resultado = await eliminar.execute(100, 1);
 
         expect(resultado).toBe(false);
-
     });
-
 });

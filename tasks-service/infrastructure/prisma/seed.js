@@ -2,29 +2,21 @@ import bcrypt from 'bcrypt';
 import { prisma } from './client.js';
 
 async function main() {
-
     const passwordHash = await bcrypt.hash('1234567', 10);
 
     const usuario = await prisma.user.create({
-
         data: {
-
             nombre: 'Administrador Pedro',
 
             correo: 'adminPedro@gmail.com',
 
             password: passwordHash,
-
         },
-
     });
 
     await prisma.tarea.createMany({
-
         data: [
-
             {
-
                 titulo: 'Aprender Express',
 
                 descripcion: 'Estudiar rutas y middlewares',
@@ -34,11 +26,9 @@ async function main() {
                 prioridad: 1,
 
                 userId: usuario.id,
-
             },
 
             {
-
                 titulo: 'Aprender Prisma',
 
                 descripcion: 'Aprender migraciones',
@@ -48,11 +38,9 @@ async function main() {
                 prioridad: 2,
 
                 userId: usuario.id,
-
             },
 
             {
-
                 titulo: 'Aprender Zod',
 
                 descripcion: 'Validar datos',
@@ -62,15 +50,11 @@ async function main() {
                 prioridad: 3,
 
                 userId: usuario.id,
-
             },
-
         ],
-
     });
 
     console.log('Seeder ejecutado correctamente');
-
 }
 
 main()

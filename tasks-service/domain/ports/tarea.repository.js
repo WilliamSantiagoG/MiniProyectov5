@@ -1,5 +1,4 @@
 export class TareaRepository {
-
     crear(_datos) {
         throw new Error('Método no implementado');
     }
@@ -19,5 +18,4 @@ export class TareaRepository {
     eliminar(_id, _userId) {
         throw new Error('Método no implementado');
     }
-
 }

@@ -2,28 +2,18 @@ import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
 
 export class Login {
-
     constructor(authRepository) {
         this.authRepository = authRepository;
     }
 
-    async ejecutar({
-        correo,
-        password,
-    }) {
-
-        const usuario =
-            await this.authRepository.buscarPorCorreo(correo);
+    async ejecutar({ correo, password }) {
+        const usuario = await this.authRepository.buscarPorCorreo(correo);
 
         if (!usuario) {
             throw new Error('Credenciales inválidas');
         }
 
-        const coincide =
-            await bcrypt.compare(
-                password,
-                usuario.password,
-            );
+        const coincide = await bcrypt.compare(password, usuario.password);
 
         if (!coincide) {
             throw new Error('Credenciales inválidas');
@@ -39,7 +29,5 @@ export class Login {
                 expiresIn: '1h',
             },
         );
-
     }
-
 }

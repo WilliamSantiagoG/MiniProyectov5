@@ -61,12 +61,7 @@ router.use(loggerMiddleware);
  *       401:
  *         description: Token inválido o no enviado.
  */
-router.post(
-    '/tareas',
-    verificarToken,
-    validar(schemaTareaCrear),
-    crearTarea,
-);
+router.post('/tareas', verificarToken, validar(schemaTareaCrear), crearTarea);
 
 /**
  * @swagger
@@ -84,11 +79,7 @@ router.post(
  *       401:
  *         description: Token inválido o no enviado.
  */
-router.get(
-    '/tareas',
-    verificarToken,
-    obtenerTareas,
-);
+router.get('/tareas', verificarToken, obtenerTareas);
 
 /**
  * @swagger
@@ -116,11 +107,7 @@ router.get(
  *       404:
  *         description: La tarea no existe o no pertenece al usuario autenticado.
  */
-router.get(
-    '/tareas/:id',
-    verificarToken,
-    obtenerTareasid,
-);
+router.get('/tareas/:id', verificarToken, obtenerTareasid);
 
 /**
  * @swagger
@@ -202,10 +189,6 @@ router.put(
  *       404:
  *         description: La tarea no existe o no pertenece al usuario autenticado.
  */
-router.delete(
-    '/tareas/:id',
-    verificarToken,
-    eliminarTarea,
-);
+router.delete('/tareas/:id', verificarToken, eliminarTarea);
 
 export default router;

@@ -1,5 +1,4 @@
 export class ObtenerTareasUseCase {
-
     constructor(tareaRepository) {
         this.tareaRepository = tareaRepository;
     }
@@ -7,5 +6,4 @@ export class ObtenerTareasUseCase {
     async execute(userId) {
         return this.tareaRepository.obtenerTodas(userId);
     }
-
 }

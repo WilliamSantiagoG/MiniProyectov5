@@ -1,49 +1,50 @@
 {
-  "name": "tasks-service",
-  "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
-  "type": "module",
-  "scripts": {
-    "dev": "nodemon index.js",
-    "start": "node index.js",
-    "test": "node --experimental-vm-modules node_modules/jest/bin/jest.js",
-    "lint": "eslint .",
-    "format": "prettier --write ."
-  },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "dependencies": {
-    "@prisma/adapter-better-sqlite3": "^7.9.1",
-    "@prisma/client": "^7.9.1",
-    "bcrypt": "^6.0.0",
-    "cors": "^2.8.6",
-    "dotenv": "^17.4.2",
-    "express": "^5.2.1",
-    "express-rate-limit": "^8.6.1",
-    "helmet": "^8.3.0",
-    "jsonwebtoken": "^9.0.3",
-    "prisma": "^7.9.1",
-    "swagger-jsdoc": "^6.3.0",
-    "swagger-ui-express": "^5.0.1",
-    "winston": "^3.19.0",
-    "zod": "^4.4.3"
-  },
-  "devDependencies": {
-    "@eslint/js": "^10.0.1",
-    "eslint": "^10.8.0",
-    "globals": "^17.8.0",
-    "jest": "^30.4.2",
-    "nodemon": "^3.1.14",
-    "prettier": "^3.9.6",
-    "supertest": "^7.2.2"
-  },
-  "prisma": {
-    "seed": "node infrastructure/prisma/seed.js"
-  },
-  "directories": {
-    "doc": "docs",
-    "test": "tests"
-  }
+    "name": "tasks-service",
+    "version": "1.0.0",
+    "description": "",
+    "main": "index.js",
+    "type": "module",
+    "scripts": {
+        "dev": "nodemon index.js",
+        "start": "node index.js",
+        "test": "node --experimental-vm-modules node_modules/jest/bin/jest.js",
+        "lint": "eslint .",
+        "format": "prettier --write .",
+        "format:check": "prettier --check ."
+    },
+    "keywords": [],
+    "author": "",
+    "license": "ISC",
+    "dependencies": {
+        "@prisma/adapter-better-sqlite3": "^7.9.1",
+        "@prisma/client": "^7.9.1",
+        "bcrypt": "^6.0.0",
+        "cors": "^2.8.6",
+        "dotenv": "^17.4.2",
+        "express": "^5.2.1",
+        "express-rate-limit": "^8.6.1",
+        "helmet": "^8.3.0",
+        "jsonwebtoken": "^9.0.3",
+        "prisma": "^7.9.1",
+        "swagger-jsdoc": "^6.3.0",
+        "swagger-ui-express": "^5.0.1",
+        "winston": "^3.19.0",
+        "zod": "^4.4.3"
+    },
+    "devDependencies": {
+        "@eslint/js": "^10.0.1",
+        "eslint": "^10.8.0",
+        "globals": "^17.8.0",
+        "jest": "^30.4.2",
+        "nodemon": "^3.1.14",
+        "prettier": "^3.9.6",
+        "supertest": "^7.2.2"
+    },
+    "prisma": {
+        "seed": "node infrastructure/prisma/seed.js"
+    },
+    "directories": {
+        "doc": "docs",
+        "test": "tests"
+    }
 }

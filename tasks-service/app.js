@@ -28,11 +28,7 @@ app.use(limiter);
 app.use('/api', router);
 
 // Swagger
-app.use(
-    '/api-docs',
-    swaggerUi.serve,
-    swaggerUi.setup(swaggerSpec),
-);
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 
 // Manejo de errores
 app.use(errorHandler);

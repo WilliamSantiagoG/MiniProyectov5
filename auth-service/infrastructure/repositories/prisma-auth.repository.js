@@ -2,7 +2,6 @@ import { AuthRepository } from '../../domain/ports/auth.repository.js';
 import { prisma } from '../prisma/client.js';
 
 export class PrismaAuthRepository extends AuthRepository {
-
     constructor() {
         super();
     }
@@ -28,5 +27,4 @@ export class PrismaAuthRepository extends AuthRepository {
             },
         });
     }
-
 }

@@ -15,10 +15,7 @@ let token;
 let tareaId;
 
 describe('Pruebas de integración - Tareas', () => {
-
     beforeAll(() => {
-
-
         // Antes de ejecutar las pruebas se crea manualmente un JWT.
         // De esta forma las pruebas de tasks-service son independientes
         // y no necesitan registrar usuarios ni llamar al login del auth-service.
@@ -29,11 +26,9 @@ describe('Pruebas de integración - Tareas', () => {
             },
             process.env.JWT_SECRET,
         );
-
     });
 
     test('Debe crear una tarea', async () => {
-
         const respuesta = await request(app)
             .post('/api/tareas')
             .set('Authorization', `Bearer ${token}`)
@@ -51,11 +46,9 @@ describe('Pruebas de integración - Tareas', () => {
         expect(respuesta.body.titulo).toBe('Aprender Supertest');
 
         tareaId = respuesta.body.id;
-
     });
 
     test('Debe obtener todas las tareas del usuario', async () => {
-
         const respuesta = await request(app)
             .get('/api/tareas')
             .set('Authorization', `Bearer ${token}`);
@@ -63,11 +56,9 @@ describe('Pruebas de integración - Tareas', () => {
         expect(respuesta.status).toBe(200);
 
         expect(Array.isArray(respuesta.body)).toBe(true);
-
     });
 
     test('Debe obtener una tarea por id', async () => {
-
         const respuesta = await request(app)
             .get(`/api/tareas/${tareaId}`)
             .set('Authorization', `Bearer ${token}`);
@@ -75,11 +66,9 @@ describe('Pruebas de integración - Tareas', () => {
         expect(respuesta.status).toBe(200);
 
         expect(respuesta.body.id).toBe(tareaId);
-
     });
 
     test('Debe actualizar una tarea', async () => {
-
         const respuesta = await request(app)
             .put(`/api/tareas/${tareaId}`)
             .set('Authorization', `Bearer ${token}`)
@@ -93,68 +82,52 @@ describe('Pruebas de integración - Tareas', () => {
         expect(respuesta.status).toBe(200);
 
         expect(respuesta.body.titulo).toBe('Supertest Actualizado');
-
     });
 
     test('Debe eliminar una tarea', async () => {
-
         const respuesta = await request(app)
             .delete(`/api/tareas/${tareaId}`)
             .set('Authorization', `Bearer ${token}`);
 
         expect(respuesta.status).toBe(200);
 
-        expect(respuesta.body.mensaje)
-            .toBe('Tarea eliminada correctamente');
-
+        expect(respuesta.body.mensaje).toBe('Tarea eliminada correctamente');
     });
 
-    //Prueba de los casos de error 
+    //Prueba de los casos de error
 
     test('No debe crear una tarea sin token', async () => {
-
-        const respuesta = await request(app)
-            .post('/api/tareas')
-            .send({
-                titulo: 'Tarea sin token',
-                prioridad: 1,
-            });
+        const respuesta = await request(app).post('/api/tareas').send({
+            titulo: 'Tarea sin token',
+            prioridad: 1,
+        });
 
         expect(respuesta.status).toBe(401);
 
-        expect(respuesta.body.error)
-            .toBe('Token requerido');
-
+        expect(respuesta.body.error).toBe('Token requerido');
     });
 
     test('No debe permitir acceder con un token inválido', async () => {
-
         const respuesta = await request(app)
             .get('/api/tareas')
             .set('Authorization', 'Bearer token_invalido');
 
         expect(respuesta.status).toBe(401);
 
-        expect(respuesta.body.error)
-            .toBe('Token inválido');
-
+        expect(respuesta.body.error).toBe('Token inválido');
     });
 
     test('No debe obtener una tarea inexistente', async () => {
-
         const respuesta = await request(app)
             .get('/api/tareas/999999')
             .set('Authorization', `Bearer ${token}`);
 
         expect(respuesta.status).toBe(404);
 
-        expect(respuesta.body.error)
-            .toBe('Tarea no encontrada');
-
+        expect(respuesta.body.error).toBe('Tarea no encontrada');
     });
 
     test('No debe actualizar una tarea inexistente', async () => {
-
         const respuesta = await request(app)
             .put('/api/tareas/99999')
             .set('Authorization', `Bearer ${token}`)
@@ -164,9 +137,6 @@ describe('Pruebas de integración - Tareas', () => {
 
         expect(respuesta.status).toBe(404);
 
-        expect(respuesta.body.error)
-            .toBe('Tarea no encontrada');
-
+        expect(respuesta.body.error).toBe('Tarea no encontrada');
     });
-
-}); 
+});

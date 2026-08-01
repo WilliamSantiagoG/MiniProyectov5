@@ -1,4 +1,4 @@
-// ESLint detecta errores y malas prácticas; 
+// ESLint detecta errores y malas prácticas;
 import js from '@eslint/js';
 import globals from 'globals';
 

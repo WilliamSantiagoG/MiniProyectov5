@@ -10,37 +10,23 @@ const registrarUsuario = new RegistrarUsuario(authRepository);
 const loginUsuario = new Login(authRepository);
 
 export const registrar = async (req, res, next) => {
-
     try {
-
-        const usuario =
-            await registrarUsuario.ejecutar(req.body);
+        const usuario = await registrarUsuario.ejecutar(req.body);
 
         res.status(201).json(usuario);
-
     } catch (err) {
-
         next(err);
-
     }
-
 };
 
 export const login = async (req, res, next) => {
-
     try {
-
-        const token =
-            await loginUsuario.ejecutar(req.body);
+        const token = await loginUsuario.ejecutar(req.body);
 
         res.json({
             token,
         });
-
     } catch (err) {
-
         next(err);
-
     }
-
 };

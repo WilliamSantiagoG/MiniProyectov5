@@ -1,5 +1,4 @@
 export class Tarea {
-
     constructor({
         id,
         titulo,
@@ -9,7 +8,6 @@ export class Tarea {
         userId,
         creado,
     }) {
-
         this.id = id;
         this.titulo = titulo;
         this.descripcion = descripcion;
@@ -17,7 +15,5 @@ export class Tarea {
         this.prioridad = prioridad;
         this.userId = userId;
         this.creado = creado;
-
     }
-
 }

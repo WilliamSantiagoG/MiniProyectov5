@@ -9,7 +9,6 @@ import { EliminarTareaUseCase } from './use-cases/tareas/eliminar-tarea.js';
 const repository = new PrismaTareaRepository();
 
 export const dependencies = {
-
     crearTarea: new CrearTareaUseCase(repository),
 
     obtenerTareas: new ObtenerTareasUseCase(repository),
@@ -19,5 +18,4 @@ export const dependencies = {
     actualizarTarea: new ActualizarTareaUseCase(repository),
 
     eliminarTarea: new EliminarTareaUseCase(repository),
-
 };

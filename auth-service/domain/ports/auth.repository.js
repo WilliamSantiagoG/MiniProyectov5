@@ -1,5 +1,4 @@
 export class AuthRepository {
-
     async buscarPorCorreo(_correo) {
         throw new Error('Método no implementado');
     }
@@ -11,5 +10,4 @@ export class AuthRepository {
     async buscarPorId(_id) {
         throw new Error('Método no implementado');
     }
-
 }
