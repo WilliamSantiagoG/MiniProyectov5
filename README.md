@@ -113,23 +113,6 @@ npm install
 
 cd ../tasks-service
 npm install
-```
-
----
-
-# Variables de entorno
-
-Crear un archivo `.env` en la raíz del proyecto:
-
-```env
-PORT_AUTH=3001
-PORT_TASKS=3002
-
-DATABASE_URL="file:../dev.db"
-
-JWT_SECRET=MiClaveSuperSecreta123456
-```
-
 ---
 
 # Ejecutar los microservicios
