@@ -1,4 +1,4 @@
-import { dependencies } from '../application/dependencies.js';
+import { dependencies } from '../config/dependencies.js';
 
 export const crearTarea = async (req, res, next) => {
     try {
