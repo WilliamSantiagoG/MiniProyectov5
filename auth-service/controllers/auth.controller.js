@@ -2,8 +2,7 @@ import { dependencies } from '../config/dependencies.js';
 
 export const registrar = async (req, res, next) => {
     try {
-        const usuario =
-            await dependencies.registrarUsuario.ejecutar(req.body);
+        const usuario = await dependencies.registrarUsuario.ejecutar(req.body);
 
         res.status(201).json(usuario);
     } catch (err) {
@@ -13,8 +12,7 @@ export const registrar = async (req, res, next) => {
 
 export const login = async (req, res, next) => {
     try {
-        const token =
-            await dependencies.loginUsuario.ejecutar(req.body);
+        const token = await dependencies.loginUsuario.ejecutar(req.body);
 
         res.json({ token });
     } catch (err) {
