@@ -1,4 +1,4 @@
-# Verifica automaticamente que el codigo siga funcionando correctamente cada vez que se sube un cambio.
+# Verifica automáticamente que el código siga funcionando correctamente cada vez que se sube un cambio.
 name: Node.js CI
 
 on:
@@ -9,21 +9,17 @@ on:
 jobs:
 
   auth-service:
-    #Crea una máquina virtual con Ubuntu
     runs-on: ubuntu-latest
 
-    # Todos los comandos se ejecutan sin necesidad de entrar a la carpeta
     defaults:
       run:
         working-directory: auth-service
 
-    # Variables de entorno para GitHub Actions
     env:
       DATABASE_URL: "file:../dev.db"
       JWT_SECRET: ${{ secrets.JWT_SECRET }}
 
     steps:
-
       - name: Descargar repositorio
         uses: actions/checkout@v4
 
@@ -48,7 +44,6 @@ jobs:
         run: npm test
 
   tasks-service:
-
     runs-on: ubuntu-latest
 
     defaults:
@@ -60,7 +55,6 @@ jobs:
       JWT_SECRET: ${{ secrets.JWT_SECRET }}
 
     steps:
-
       - name: Descargar repositorio
         uses: actions/checkout@v4
 
@@ -83,4 +77,28 @@ jobs:
 
       - name: Ejecutar Tests
         run: npm test
-        
+
+  gateway:
+    runs-on: ubuntu-latest
+
+    defaults:
+      run:
+        working-directory: gateway
+
+    steps:
+      - name: Descargar repositorio
+        uses: actions/checkout@v4
+
+      - name: Instalar Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Instalar dependencias
+        run: npm install
+
+      - name: Ejecutar ESLint
+        run: npm run lint
+
+      - name: Ejecutar Prettier (check)
+        run: npm run format:check
