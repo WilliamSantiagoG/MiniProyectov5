@@ -1,26 +1,26 @@
 {
-  "name": "gateway",
-  "version": "1.0.0",
-  "type": "module",
-  "scripts": {
-    "dev": "nodemon index.js",
-    "start": "node index.js",
-    "lint": "eslint .",
-    "format": "prettier --write .",
-    "format:check": "prettier --check ."
-  },
-  "dependencies": {
-    "cors": "^2.8.5",
-    "dotenv": "^17.4.2",
-    "express": "^5.2.1",
-    "helmet": "^8.3.0",
-    "http-proxy-middleware": "^3.0.7"
-  },
-  "devDependencies": {
-    "@eslint/js": "^10.x",
-    "eslint": "^10.x",
-    "globals": "^17.x",
-    "nodemon": "^3.x",
-    "prettier": "^3.x"
-  }
+    "name": "gateway",
+    "version": "1.0.0",
+    "type": "module",
+    "scripts": {
+        "dev": "nodemon index.js",
+        "start": "node index.js",
+        "lint": "eslint .",
+        "format": "prettier --write .",
+        "format:check": "prettier --check ."
+    },
+    "dependencies": {
+        "cors": "^2.8.5",
+        "dotenv": "^17.4.2",
+        "express": "^5.2.1",
+        "helmet": "^8.3.0",
+        "http-proxy-middleware": "^3.0.7"
+    },
+    "devDependencies": {
+        "@eslint/js": "^10.x",
+        "eslint": "^10.x",
+        "globals": "^17.x",
+        "nodemon": "^3.x",
+        "prettier": "^3.x"
+    }
 }
