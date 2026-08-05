@@ -1,81 +1,22 @@
-
-# MiniProyectoV5
+# Mini Proyecto API REST con Microservicios
 
 [![Node.js CI](https://github.com/WilliamSantiagoG/MiniProyectov5/actions/workflows/node.yml/badge.svg)](https://github.com/WilliamSantiagoG/MiniProyectov5/actions/workflows/node.yml)
 
 ## Descripción
 
-MiniProyectoV5 es un sistema desarrollado con arquitectura de microservicios y Arquitectura Hexagonal.
+Proyecto desarrollado con arquitectura de microservicios utilizando Node.js y Express.
 
-El proyecto está compuesto por dos microservicios independientes:
+El sistema está compuesto por:
 
-- **Auth Service**: encargado del registro de usuarios, autenticación y generación de JWT.
-- **Tasks Service**: encargado de la administración de tareas protegidas mediante JWT.
+- **Gateway**: Punto único de entrada para todas las peticiones HTTP.
+- **Auth Service**: Encargado del registro, autenticación y generación de JWT.
+- **Tasks Service**: Encargado de la gestión de tareas protegidas mediante JWT.
 
-Cada microservicio cuenta con:
-
-- Arquitectura Hexagonal
-- Prisma ORM
-- SQLite
-- Swagger
-- JWT
-- Winston
-- Jest
-- Supertest
-- ESLint
-- Prettier
+Cada microservicio implementa **Arquitectura Hexagonal (Ports & Adapters)**, separando la lógica de negocio de la infraestructura.
 
 ---
 
-# Arquitectura
-
-El proyecto implementa Arquitectura Hexagonal.
-
-```
-Controller
-        │
-        ▼
-Use Case
-        │
-        ▼
-Repository (Puerto)
-        │
-        ▼
-Prisma Repository
-        │
-        ▼
-SQLite
-```
-
----
-
-# Estructura del proyecto
-
-```
-MiniProyectoV5
-│
-├── auth-service
-│   ├── application
-│   ├── controllers
-│   ├── domain
-│   ├── infrastructure
-│   ├── routes
-│   └── tests
-│
-├── tasks-service
-│   ├── application
-│   ├── controllers
-│   ├── domain
-│   ├── infrastructure
-│   ├── routes
-│   └── tests
-│
-└── .github
-```
-
----
-
-# Tecnologías
+## Tecnologías utilizadas
 
 - Node.js
 - Express
@@ -83,48 +24,56 @@ MiniProyectoV5
 - SQLite
 - JWT
 - Swagger
-- Winston
 - Jest
 - Supertest
+- Winston
+- Zod
 - ESLint
 - Prettier
+- Helmet
+- CORS
+- Express Rate Limit
+- http-proxy-middleware
 
 ---
 
-# Instalación
+# Arquitectura del proyecto
 
-Clonar el proyecto
-
-```bash
-git clone https://github.com/WilliamSantiagoG/MiniProyectov5.git
+```
+MiniProyectov5
+│
+├── gateway
+│
+├── auth-service
+│
+└── tasks-service
 ```
 
-Entrar al proyecto
-
-```bash
-cd MiniProyectoV5
-```
-
-Instalar dependencias
-
-```bash
-cd auth-service
-npm install
-
-cd ../tasks-service
-npm install
 ---
 
-# Ejecutar los microservicios
+# Responsabilidad de cada servicio
 
-### Auth Service
+## Gateway
 
-```bash
-cd auth-service
-npm run dev
+- Punto único de entrada.
+- Redirecciona las peticiones HTTP hacia cada microservicio.
+- Puerto:
+
+```
+http://localhost:3000
 ```
 
-Disponible en:
+---
+
+## Auth Service
+
+Responsable de:
+
+- Registro de usuarios.
+- Inicio de sesión.
+- Generación de JWT.
+
+Puerto interno:
 
 ```
 http://localhost:3001
@@ -132,14 +81,16 @@ http://localhost:3001
 
 ---
 
-### Tasks Service
+## Tasks Service
 
-```bash
-cd tasks-service
-npm run dev
-```
+Responsable de:
 
-Disponible en:
+- Crear tareas.
+- Consultar tareas.
+- Actualizar tareas.
+- Eliminar tareas.
+
+Puerto interno:
 
 ```
 http://localhost:3002
@@ -147,15 +98,67 @@ http://localhost:3002
 
 ---
 
+# Endpoints disponibles
+
+## Auth
+
+Registrar usuario
+
+```
+POST http://localhost:3000/auth/api/register
+```
+
+Login
+
+```
+POST http://localhost:3000/auth/api/login
+```
+
+---
+
+## Tasks
+
+Obtener tareas
+
+```
+GET http://localhost:3000/tasks/api/tareas
+```
+
+Crear tarea
+
+```
+POST http://localhost:3000/tasks/api/tareas
+```
+
+Obtener una tarea
+
+```
+GET http://localhost:3000/tasks/api/tareas/:id
+```
+
+Actualizar tarea
+
+```
+PUT http://localhost:3000/tasks/api/tareas/:id
+```
+
+Eliminar tarea
+
+```
+DELETE http://localhost:3000/tasks/api/tareas/:id
+```
+
+---
+
 # Documentación Swagger
 
-## Auth Service
+Auth Service
 
 ```
 http://localhost:3001/api-docs
 ```
 
-## Tasks Service
+Tasks Service
 
 ```
 http://localhost:3002/api-docs
@@ -163,15 +166,81 @@ http://localhost:3002/api-docs
 
 ---
 
-# Ejecutar pruebas
+# Ejecución del proyecto
 
-Auth Service
+## 1. Instalar dependencias
+
+### Gateway
 
 ```bash
-npm test
+cd gateway
+npm install
 ```
 
-Tasks Service
+### Auth Service
+
+```bash
+cd auth-service
+npm install
+```
+
+### Tasks Service
+
+```bash
+cd tasks-service
+npm install
+```
+
+---
+
+## 2. Ejecutar los servicios
+
+### Auth Service
+
+```bash
+npm run dev
+```
+
+Puerto:
+
+```
+3001
+```
+
+### Tasks Service
+
+```bash
+npm run dev
+```
+
+Puerto:
+
+```
+3002
+```
+
+### Gateway
+
+```bash
+npm run dev
+```
+
+Puerto:
+
+```
+3000
+```
+
+---
+
+# Pruebas
+
+Cada microservicio cuenta con:
+
+- Pruebas unitarias de los Casos de Uso.
+- Pruebas de integración con Supertest.
+
+Ejecutar:
 
 ```bash
 npm test
@@ -179,9 +248,9 @@ npm test
 
 ---
 
-# Calidad del código
+# Calidad de código
 
-Ejecutar ESLint
+Verificar ESLint
 
 ```bash
 npm run lint
@@ -201,23 +270,14 @@ npm run format
 
 ---
 
-# Integración Continua
+# Integración continua
 
-El proyecto utiliza **GitHub Actions** para ejecutar automáticamente:
+El proyecto cuenta con un workflow de **GitHub Actions** que ejecuta automáticamente:
 
-- Instalación de dependencias
-- Generación del cliente Prisma
-- ESLint
-- Prettier
-- Pruebas unitarias
-- Pruebas de integración
+- Instalación de dependencias.
+- Generación del cliente Prisma.
+- ESLint.
+- Prettier.
+- Jest.
 
-Cada vez que se realiza un **push** a la rama **main**, el workflow valida ambos microservicios.
-
----
-
-# Autor
-
-William Santiago Guerrero
-
-Tecnólogo en Análisis y Desarrollo de Software
+Cada vez que se realiza un **push** sobre la rama **main**.
