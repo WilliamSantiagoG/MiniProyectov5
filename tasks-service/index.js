@@ -1,6 +1,7 @@
 import dotenv from 'dotenv';
 import path from 'path';
 import { fileURLToPath } from 'url';
+import './shared/listeners/task.listener.js';
 
 import app from './app.js';
 

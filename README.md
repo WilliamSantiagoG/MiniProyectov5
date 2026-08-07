@@ -281,3 +281,20 @@ El proyecto cuenta con un workflow de **GitHub Actions** que ejecuta automática
 - Jest.
 
 Cada vez que se realiza un **push** sobre la rama **main**.
+
+# Arquitectura del Proyecto
+
+El proyecto sigue una arquitectura basada en microservicios con un API Gateway como punto de entrada.
+
+- API Gateway
+- Auth Service
+- Tasks Service
+- Arquitectura Hexagonal
+- Factory
+- Observer (EventEmitter)
+- Prisma ORM
+- SQLite
+
+## Diagrama de Arquitectura
+
+![Arquitectura](docs/architecture-diagram.png)

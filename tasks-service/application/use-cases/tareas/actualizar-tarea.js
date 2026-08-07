@@ -1,3 +1,5 @@
+import taskEvents from '../../../shared/events/task.events.js';
+
 export class ActualizarTareaUseCase {
     constructor(tareaRepository) {
         this.tareaRepository = tareaRepository;
@@ -33,6 +35,16 @@ export class ActualizarTareaUseCase {
             return tareaActual;
         }
 
-        return this.tareaRepository.actualizar(id, userId, datosActualizar);
+        const tareaActualizada = await this.tareaRepository.actualizar(
+            id,
+            userId,
+            datosActualizar,
+        );
+
+        if (!tareaActual.completada && tareaActualizada.completada) {
+            taskEvents.emit('tareaCompletada', tareaActualizada);
+        }
+
+        return tareaActualizada;
     }
 }
